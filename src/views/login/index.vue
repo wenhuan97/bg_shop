@@ -84,14 +84,13 @@ export default {
             spinner: 'el-icon-loading',
             background: 'rgba(0, 0, 0, 0.7)'
           })
-          const { data } = await userLogin({
-            username: this.user.username,
-            password: this.user.password
-          })
+          const { data } = await userLogin(this.user)
           if (data.meta.status === 200) {
             loading.close()
             //   登录成功 跳转至 主页
-            this.$router.push('/')
+            // 保存token
+            window.sessionStorage.setItem('token', data.data.token)
+            this.$router.push('/home')
             this.$message.success('登录成功~')
           } else {
             loading.close()
