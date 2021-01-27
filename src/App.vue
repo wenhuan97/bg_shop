@@ -1,10 +1,14 @@
 <template>
-  <div id="app">电商后台管理</div>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 export default {
-  data () {}
+  data() {
+    return {}
+  }
 }
 </script>
 
