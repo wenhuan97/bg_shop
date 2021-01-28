@@ -12,12 +12,61 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/login')
+    component: () => import('@/views/login/')
   },
   {
     path: '/home',
     name: '',
-    component: () => import('@/views/layout')
+    redirect: '/welcome',
+    component: () => import('@/views/layout/'),
+    children: [
+
+      {
+        path: '/welcome',
+        name: 'welcome',
+        component: () => import('@/views/welcome/')
+      },
+      {
+        path: '/users',
+        name: 'users',
+        component: () => import('@/views/users/')
+      },
+      {
+        path: '/roles',
+        name: 'roles',
+        component: () => import('@/views/roles/')
+      },
+      {
+        path: '/rights',
+        name: 'rights',
+        component: () => import('@/views/rights/')
+      },
+      {
+        path: '/goods',
+        name: 'goods',
+        component: () => import('@/views/goods/')
+      },
+      {
+        path: '/params',
+        name: 'params',
+        component: () => import('@/views/params/')
+      },
+      {
+        path: '/categories',
+        name: 'categories',
+        component: () => import('@/views/categories/')
+      },
+      {
+        path: '/orders',
+        name: 'orders',
+        component: () => import('@/views/orders/')
+      },
+      {
+        path: '/reports',
+        name: 'reports',
+        component: () => import('@/views/reports/')
+      }
+    ]
   }
 ]
 
