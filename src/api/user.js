@@ -54,9 +54,12 @@ export const deleteUser = id => {
   })
 }
 // 分配用户角色
-export const allotUser = id => {
+export const allotUser = (id, rid) => {
   return request({
     method: 'PUT',
-    url: `/users/${id}/role`
+    url: `/users/${id}/role`,
+    data: {
+      rid
+    }
   })
 }

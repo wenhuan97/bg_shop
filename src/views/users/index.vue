@@ -58,7 +58,7 @@
             </el-tooltip>
             <el-tooltip :enterable="false" content="分配角色" placement="top">
               <el-button
-                @click="allotRoles(scope)"
+                @click="showAllotRoles(scope.row)"
                 circle
                 type="warning"
                 icon="el-icon-setting"
@@ -140,6 +140,32 @@
         <el-button type="primary" @click="submitEditUser">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 分配角色的对话框 -->
+    <el-dialog
+      @close="closeAllotDialog"
+      title="分配角色"
+      :visible.sync="allotDialog"
+      width="50%"
+    >
+      <div>所属用户：{{ userObj.username }}</div>
+      <div style="margin: 15px 0">所属角色：{{ userObj.role_name }}</div>
+      <div>
+        <span>分配角色：</span>
+        <el-select v-model="value" placeholder="请选择">
+          <el-option
+            v-for="item in roleList"
+            :key="item.id"
+            :label="item.roleName"
+            :value="item.id"
+          >
+          </el-option>
+        </el-select>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="allotDialog = false">取 消</el-button>
+        <el-button type="primary" @click="allotRoles">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -150,8 +176,10 @@ import {
   addUser,
   getUser,
   editUserSubmit,
-  deleteUser
+  deleteUser,
+  allotUser
 } from '@/api/user'
+import { getRolesList } from '@/api/roles'
 
 export default {
   name: 'usersIndex',
@@ -181,7 +209,11 @@ export default {
     return {
       // 文本框搜索的内容
       text: '',
+      //   select选中的并显示的值
+      value: '',
       userList: [],
+      userObj: {},
+      roleList: [],
       pagenum: 1,
       pageSize: 2,
       total: 0, // 总数据条数
@@ -192,6 +224,7 @@ export default {
       dialogVisible: false,
       dialogEdit: false,
       addLoading: false,
+      allotDialog: false,
       loading: false,
       //   修改用户的对象
       editObj: {},
@@ -282,7 +315,7 @@ export default {
       this.$refs.ruleEdit.resetFields()
     },
     // 添加用户 提交添加信息
-    async submitUser() {
+    submitUser() {
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
           this.addLoading = true
@@ -335,7 +368,7 @@ export default {
     // 删除单个用户
     async deleteUser(id) {
       const result = await this.$confirm(
-        '此操作将永久删除该文件, 是否继续?',
+        '要永久删除此用户, 是否继续?',
         '提示',
         {
           confirmButtonText: '确定',
@@ -357,9 +390,33 @@ export default {
         }
       }
     },
+    // 展示分配角色对话框
+    async showAllotRoles(userRole) {
+      const { data } = await getRolesList()
+      if (data.meta.status === 200) {
+        this.roleList = data.data
+      } else {
+        this.$message.error('获取角色信息失败')
+      }
+      this.userObj = userRole
+      this.allotDialog = true
+    },
     // 分配角色
-    allotRoles(userRole) {
-      console.log(userRole)
+    async allotRoles() {
+      if (!this.value) return this.$message.error('请选择要分配的角色')
+      const { data } = await allotUser(this.userObj.id, this.value)
+      if (data.meta.status === 200) {
+        this.$message.success('分配角色成功')
+        this.loadUserList()
+        this.allotDialog = false
+      } else {
+        this.$message.error('分配失败')
+      }
+    },
+    // 监听 关闭分配角色对话框的事件
+    closeAllotDialog() {
+      this.value = ''
+      this.userObj = {}
     },
     // 分页器
     handleSizeChange(val) {
