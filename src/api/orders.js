@@ -8,3 +8,10 @@ export const getOrderList = params => {
     params
   })
 }
+// // 物流信息
+// export const getKuaidi = () => {
+//   return getReq({
+//     method: 'GET',
+//     url: './wuliu.json'
+//   })
+// }
