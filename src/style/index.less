@@ -33,6 +33,33 @@ ul {
 html {
     box-sizing: border-box;
 }
+
 #app {
     min-width: 1366px;
+}
+
+.el-cascader-menu__wrap {
+    height: 300px !important;
+}
+
+.el-cascader {
+    width: 100%;
+}
+
+.el-step__title {
+    font-size: 13px;
+}
+
+// 隐藏input中type='number' 的箭头
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.ql-editor {
+    min-height: 300px !important;
 }
