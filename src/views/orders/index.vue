@@ -196,7 +196,7 @@ export default {
     // 物流信息
     async locationOrders() {
       this.KdDialog = true
-      const { data } = await this.$axios.get('./wuliu.json')
+      const { data } = await this.$axios.get('http://localhost:5000/wuliu.json')
       this.wuliuList = data.data
     },
     // 每页的条数

@@ -281,6 +281,7 @@ export default {
         pagenum: this.pagenum,
         pagesize: this.pageSize
       })
+      console.log(data)
       this.userList = data.data.users
       this.total = data.data.total
     },
