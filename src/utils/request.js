@@ -3,7 +3,7 @@ import Vue from 'vue'
 Vue.prototype.$axios = axios
 
 const request = axios.create({
-  baseURL: 'http://127.0.0.1:8888/api/private/v1/'
+  baseURL: 'http://81.69.245.15:3000/api/private/v1/'
 })
 
 // 请求拦截器 每次请求前加token

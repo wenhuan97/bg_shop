@@ -11,23 +11,23 @@
     <!-- 根据 编译模式的不同 选择加载方式 cdn连接的引入 只在发布模式中使用 -->
     <% if(htmlWebpackPlugin.options.isPord) { %>
     <!-- 引入element样式 -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.0/lib/theme-chalk/index.css">
     <!-- 富文本的css -->
     <link href="https://cdn.quilljs.com/1.3.4/quill.core.css" rel="stylesheet">
     <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
     <link href="https://cdn.quilljs.com/1.3.4/quill.bubble.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
-    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.bootcss.com/echarts/4.9.0/echarts.min.js"></script>
+    <script src="https://unpkg.com/vue-router@3.2.0/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/4.1.0/echarts.min.js"></script>
     <script src=" https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
 
     <!-- 富文本编辑器js -->
     <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-quill-editor@3.0.6/dist/vue-quill-editor.js"></script>
     <!-- element。js -->
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/element-ui@2.15.0/lib/index.js"></script>
     <% } %>
 </head>
 
